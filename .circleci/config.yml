@@ -7,11 +7,14 @@ jobs:
     steps:
       - checkout
       - run: sudo npm install @neuralegion/nexploit-cli -g --unsafe-perm=true || true
-      - run: sudo apt install jq -y     
+      - run: sudo apt install jq -y   
       - run:
           name: Starting Nexploit scan with repeater 🏁
           command: >
-
+              (nexploit-cli repeater --id pQVpFx4swaytVDV9m5p3fS --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b)  
+      - run:
+          name: Starting Nexploit scan with repeater 🏁
+          command: >
               echo export SCAN_ID=$(nexploit-cli scan:run --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b 
               --name "BC Scan from CircleCI"
               --crawler https://brokencrystals.com/
@@ -75,7 +78,7 @@ jobs:
                     while [ $i -lt $len ]; do
                     echo " "
                     echo " "
-                    echo "ID OF THE SCAN IS    ${a[$i]}"
+                    echo "ID OF THE ISSUE IS    ${a[$i]}"
                     echo "NAME    "${b[$i]}
                     echo "DETAILS    "${c[$i]}
                     echo "SEVERITY    "${d[$i]}
