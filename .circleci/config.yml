@@ -20,7 +20,7 @@ jobs:
                 a=(); while read -r line; do a+=("$line"); done <<<"$ISSUES_ID_ARRAY"; declare a;
 
                 GET_NAME=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' \
-                 -H 'accept: application/json' -H 'Authorization: Api-Key 'lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b'' | jq '.[].name' )
+                -H 'accept: application/json' -H 'Authorization: Api-Key 'lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b'' | jq '.[].name' )
                 ISSUES_NAME_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_NAME")
                 b=(); while read -r line; do b+=("$line"); done <<<"$ISSUES_NAME_ARRAY"; declare b;
 
