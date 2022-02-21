@@ -11,7 +11,8 @@ jobs:
       - run:
           name: Starting Nexploit scan with repeater 🏁
           command: >
-              echo export SCAN_ID=$(nexploit-cli scan:run --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b
+
+              echo export SCAN_ID=$(nexploit-cli scan:run --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b 
               --name "BC Scan from CircleCI"
               --crawler https://brokencrystals.com/
               --smart) >> "$BASH_ENV"
