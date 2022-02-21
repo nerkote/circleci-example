@@ -26,13 +26,13 @@ jobs:
               (nexploit-cli scan:polling
               --interval 30s
               --timeout 20m
-              --token $NEXPLOIT_TOKEN
-              --breakpoint medium_issue ${SCAN_ID})
+              --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b
+              --breakpoint high_issue ${SCAN_ID})
       - run:
           name: Stop Scan 🛑
           when: on_fail
           command: |
-              nexploit-cli scan:stop --token $NEXPLOIT_TOKEN ${SCAN_ID}
+              nexploit-cli scan:stop --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b ${SCAN_ID}
       - run:
           name: Running a script
           command: |
