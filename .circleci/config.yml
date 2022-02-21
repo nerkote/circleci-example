@@ -30,12 +30,7 @@ jobs:
                     -H 'Authorization: Api-Key 'lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b'' | jq '.[].severity' )
                     ISSUES_SEVERITY_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_SEVERITY")
                     d=(); while read -r line; do d+=("$line"); done <<<"$ISSUES_SEVERITY_ARRAY"; declare d;
-
-                    GET_PROTOCOL=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' \ 
-                    -H 'accept: application/json' -H 'Authorization: Api-Key 'lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b'' | jq '.[].protocol' )
-                    ISSUES_PROTOCOL_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_PROTOCOL")
-                    e=(); while read -r line; do e+=("$line"); done <<<"$ISSUES_PROTOCOL_ARRAY"; declare e;
-
+      
                     GET_EXPOSURE=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' \
                     -H 'accept: application/json' -H 'Authorization: Api-Key 'lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b'' | jq '.[].exposure' )
                     ISSUES_EXPOSURE_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_EXPOSURE")
