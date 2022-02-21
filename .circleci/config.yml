@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Starting Nexploit scan 🏁
           command: >
-              echo export SCAN_ID=$(nexploit-cli scan:run --token $NEXPLOIT_TOKEN
+              echo export SCAN_ID=$(nexploit-cli scan:run --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b
               --name "BC Scan from CircleCI"
               --crawler https://brokencrystals.com/
               --smart) >> "$BASH_ENV"
@@ -24,7 +24,7 @@ jobs:
               (nexploit-cli scan:polling
               --interval 30s
               --timeout 20m
-              --token $NEXPLOIT_TOKEN
+              --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b
               --breakpoint medium_issue ${SCAN_ID})
       - run:
           name: Stop Scan 🛑
