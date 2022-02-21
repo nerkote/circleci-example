@@ -11,7 +11,8 @@ jobs:
       - run:
           name: Starting Nexploit scan with repeater 🏁
           command: >
-              echo REPEATER_ID=$(nexploit-cli repeater --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b --id pQVpFx4swaytVDV9m5p3fS)
+              echo EXPORT REPEATER_ID=$(nexploit-cli repeater --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b --id pQVpFx4swaytVDV9m5p3fS)
+              sleep 5
               echo export SCAN_ID=$(nexploit-cli scan:run --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b --id pQVpFx4swaytVDV9m5p3fS
               --name "BC Scan from CircleCI"
               --crawler https://brokencrystals.com/
