@@ -33,9 +33,6 @@ jobs:
           when: on_fail
           command: |
               nexploit-cli scan:stop --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b ${SCAN_ID}
-      - run:
-          name: Running a script
-          command: |
                     GET_ID=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].id' )
                     ISSUES_ID_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_ID")
                     a=(); while read -r line; do a+=("$line"); done <<<"$ISSUES_ID_ARRAY"; declare a;
