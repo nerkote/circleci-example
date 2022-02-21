@@ -6,11 +6,39 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - run: sudo npm install @neuralegion/nexploit-cli -g --unsafe-perm=true || true
       - run: sudo apt install jq -y
       - run:
-          name: Stop Scan 🛑
+          name: Starting Nexploit repeater 🏁
+          command: >
+              echo export SCAN_ID=$(nexploit-cli repeater --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b --id pQVpFx4swaytVDV9m5p3fS) >> "$BASH_ENV"
+      - run:
+          name: Starting Nexploit scan 🏁
+          command: >
+              echo export SCAN_ID=$(nexploit-cli scan:run --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b --id pQVpFx4swaytVDV9m5p3fS
+              --name "BC Scan from CircleCI"
+              --crawler https://brokencrystals.com/
+              --smart) >> "$BASH_ENV"
+      - run: 
+          name: Get the output scan url 🔗
           command: |
-                    SCAN_ID="2Xua3j4Ncc8PpKj9Gzei9S"
+            printf "Scan was started with ID https://nexploit.app/scans/${SCAN_ID}"
+      - run:
+          name: Waiting for issues ⏳
+          command: >
+              (nexploit-cli scan:polling
+              --interval 30s
+              --timeout 20m
+              --token $NEXPLOIT_TOKEN
+              --breakpoint medium_issue ${SCAN_ID})
+      - run:
+          name: Stop Scan 🛑
+          when: on_fail
+          command: |
+              nexploit-cli scan:stop --token $NEXPLOIT_TOKEN ${SCAN_ID}
+      - run:
+          name: Running a script
+          command: |
                     GET_ID=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].id' )
                     ISSUES_ID_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_ID")
                     a=(); while read -r line; do a+=("$line"); done <<<"$ISSUES_ID_ARRAY"; declare a;
