@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Starting Nexploit repeater 🏁
           command: >
-              echo export SCAN_ID=$(nexploit-cli repeater --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b --id pQVpFx4swaytVDV9m5p3fS) >> "$BASH_ENV"
+              echo export SCAN_ID=$(nexploit-cli repeater --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b --id pQVpFx4swaytVDV9m5p3fS)
       - run:
           name: Starting Nexploit scan 🏁
           command: >
