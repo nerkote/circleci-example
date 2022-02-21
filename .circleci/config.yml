@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Stop Scan 🛑
           command: |
-              nexploit-cli scan:stop --token $NEXPLOIT_TOKEN ${SCAN_ID}
+                SCAN_ID="2Xua3j4Ncc8PpKj9Gzei9S"
                 #We send a curl request to get all the scan issues and after that we parse the Id with jq
                 GET_ID=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' \
                 -H 'Authorization: Api-Key 'lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b'' | jq '.[].id' )
