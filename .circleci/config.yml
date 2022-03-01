@@ -7,15 +7,10 @@ jobs:
     steps:
       - checkout
       - run: sudo npm install @neuralegion/nexploit-cli -g --unsafe-perm=true || true
-      - run: sudo apt install jq -y   
       - run:
           name: Starting Nexploit scan with repeater 🏁
           command: >
-              (nexploit-cli repeater --id pQVpFx4swaytVDV9m5p3fS --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b)  
-      - run:
-          name: Starting Nexploit scan with repeater 🏁
-          command: >
-              echo export SCAN_ID=$(nexploit-cli scan:run --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b 
+              echo export SCAN_ID=$(nexploit-cli scan:run --token 7ooom52.nexp.it31awztcqw9kh1jfp5zrmiug0kvmijq --cluster demo.neuralegion.com
               --name "BC Scan from CircleCI"
               --crawler https://brokencrystals.com/
               --smart) >> "$BASH_ENV"
@@ -29,64 +24,11 @@ jobs:
               (nexploit-cli scan:polling
               --interval 30s
               --timeout 20m
-              --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b
+              --token 7ooom52.nexp.it31awztcqw9kh1jfp5zrmiug0kvmijq
               --breakpoint high_issue ${SCAN_ID})
       - run:
           name: Stop Scan 🛑
           when: on_fail
           command: |
-              nexploit-cli scan:stop --token lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b ${SCAN_ID}
-                    GET_ID=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].id' )
-                    ISSUES_ID_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_ID")
-                    a=(); while read -r line; do a+=("$line"); done <<<"$ISSUES_ID_ARRAY"; declare a;
-
-                    GET_NAME=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].name' )
-                    ISSUES_NAME_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_NAME")
-                    b=(); while read -r line; do b+=("$line"); done <<<"$ISSUES_NAME_ARRAY"; declare b;
-
-                    GET_DETAILS=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].details' )
-                    ISSUES_DETAILS_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_DETAILS")
-                    c=(); while read -r line; do c+=("$line"); done <<<"$ISSUES_DETAILS_ARRAY"; declare c;
-
-                    GET_SEVERITY=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].severity' )
-                    ISSUES_SEVERITY_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_SEVERITY")
-                    d=(); while read -r line; do d+=("$line"); done <<<"$ISSUES_SEVERITY_ARRAY"; declare d;
-
-                    GET_PROTOCOL=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].protocol' )
-                    ISSUES_PROTOCOL_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_PROTOCOL")
-                    e=(); while read -r line; do e+=("$line"); done <<<"$ISSUES_PROTOCOL_ARRAY"; declare e;
-      
-                    GET_EXPOSURE=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].exposure' )
-                    ISSUES_EXPOSURE_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_EXPOSURE")
-                    f=(); while read -r line; do f+=("$line"); done <<<"$ISSUES_EXPOSURE_ARRAY"; declare f;
-
-                    GET_CVSS=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].cvss' )
-                    ISSUES_CVSS_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_CVSS")
-                    g=(); while read -r line; do g+=("$line"); done <<<"$ISSUES_CVSS_ARRAY"; declare g;
-
-                    GET_CWE=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].cwe' )
-                    ISSUES_CWE_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_CWE")
-                    h=(); while read -r line; do h+=("$line"); done <<<"$ISSUES_CWE_ARRAY"; declare h;
-
-                    GET_TIME=$(curl -X 'GET' 'https://app.neuralegion.com/api/v1/scans/'$SCAN_ID'/issues' -H 'accept: application/json' -H 'Authorization: Api-Key lfjlqct.nexa.63fphe9ajwm60vxjb2fluxaczs68sj5b' | jq '.[].time' )
-                    ISSUES_TIME_ARRAY=$(sed -e 's/^"//' -e 's/"$//' <<<"$GET_TIME")
-                    j=(); while read -r line; do i+=("$line"); done <<<"$ISSUES_TIME_ARRAY"; declare j;
-
-                    echo "The number of issues we found is is ${#a[*]}"
-                    len=${#a[*]}
-                    i=0
-                    while [ $i -lt $len ]; do
-                    echo " "
-                    echo " "
-                    echo "ID OF THE ISSUE IS    ${a[$i]}"
-                    echo "NAME    "${b[$i]}
-                    echo "DETAILS    "${c[$i]}
-                    echo "SEVERITY    "${d[$i]}
-                    echo "PROTOCOL    "${e[$i]}
-                    echo "EXPOSURE    "${f[$i]}
-                    echo "CVSS    "${g[$i]}
-                    echo "CWE    "${h[$i]}
-                    echo "TIME    "${j[$i]}
-                    let i=i+1
-                    done
+              nexploit-cli scan:stop --token 7ooom52.nexp.it31awztcqw9kh1jfp5zrmiug0kvmijq ${SCAN_ID}
 
