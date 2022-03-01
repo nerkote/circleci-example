@@ -24,6 +24,7 @@ jobs:
               (nexploit-cli scan:polling
               --interval 30s
               --timeout 20m
+              --cluster demo.neuralegion.com
               --token 7ooom52.nexp.it31awztcqw9kh1jfp5zrmiug0kvmijq
               --breakpoint high_issue ${SCAN_ID})
       - run:
