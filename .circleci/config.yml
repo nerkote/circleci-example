@@ -10,7 +10,7 @@ jobs:
       - run:
           name: Starting Nexploit scan with repeater 🏁
           command: >
-              echo export SCAN_ID=$(nexploit-cli scan:run --token 7ooom52.nexp.it31awztcqw9kh1jfp5zrmiug0kvmijq --cluster demo.neuralegion.com
+              echo export SCAN_ID=$(nexploit-cli scan:run --token $NEURALEGION --cluster demo.neuralegion.com
               --name "BC Scan from CircleCI"
               --crawler https://brokencrystals.com/
               --smart) >> "$BASH_ENV"
@@ -25,11 +25,11 @@ jobs:
               --interval 30s
               --timeout 20m
               --cluster demo.neuralegion.com
-              --token 7ooom52.nexp.it31awztcqw9kh1jfp5zrmiug0kvmijq
+              --token $NEURALEGION
               --breakpoint high_issue ${SCAN_ID})
       - run:
           name: Stop Scan 🛑
           when: on_fail
           command: |
-              nexploit-cli scan:stop --cluster demo.neuralegion.com --token 7ooom52.nexp.it31awztcqw9kh1jfp5zrmiug0kvmijq ${SCAN_ID}
+              nexploit-cli scan:stop --cluster demo.neuralegion.com --token $NEURALEGION ${SCAN_ID}
 
