@@ -11,7 +11,7 @@ jobs:
           name: Starting Nexploit scan with repeater 🏁
           command: >
               echo export SCAN_ID=$(nexploit-cli scan:run --token $NEURALEGION --cluster demo.neuralegion.com
-              --name "BC Scan from CircleCI"
+              --name "Scan from CircleCI"
               --crawler https://brokencrystals.com/
               --smart) >> "$BASH_ENV"
       - run: 
