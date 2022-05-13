@@ -24,12 +24,12 @@ jobs:
               (nexploit-cli scan:polling
               --interval 30s
               --timeout 20m
-              --cluster demo.neuralegion.com
+              --cluster app.neuralegion.com
               --token $NEURALEGION
               --breakpoint high_issue ${SCAN_ID})
       - run:
           name: Stop Scan 🛑
           when: on_fail
           command: |
-              nexploit-cli scan:stop --cluster demo.neuralegion.com --token $NEURALEGION ${SCAN_ID}
+              nexploit-cli scan:stop --cluster app.neuralegion.com --token $NEURALEGION ${SCAN_ID}
 
